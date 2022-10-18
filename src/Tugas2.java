@@ -10,22 +10,22 @@ interface library {
 public class Tugas2 implements library {
     Scanner input = new Scanner(System.in);
     String inName, inFrom;
-    int inDate, inIndex = 1;
-    public String[] book = new String[1];
-    String[] place = {"Malang", "Bandung", "Surabaya"};
+    int inDate, inIndex = 1, inIndexY;
+    public String[][] book = {{"This is Book,Malang.2022"}};
+    public String[][] place = {{"Malang"},{"Bandung"},{"Surabaya"}};
     public void cekDate(int date){
         if(date == 1){
-            for (String s : book) {
-                int parsedYear = Integer.parseInt(parseBook(s, "date"));
+            for (int y = 0; y < book.length; y++) {
+                int parsedYear = Integer.parseInt(parseBook(book[0][y], "date"));
                 if (parsedYear < 2018) {
-                    System.out.printf("%s, %s. %s\n", parseBook(s, "name"), parseBook(s, "from"), parseBook(s, "date"));
+                    System.out.printf("%s, %s. %s\n", parseBook(book[0][y], "name"), parseBook(book[0][y], "from"), parseBook(book[0][y], "date"));
                 }
             }
         } else if (date == 0){
-            for (String s : book) {
-                int parsedYear = Integer.parseInt(parseBook(s, "date"));
+            for (int y = 0; y < book.length; y++) {
+                int parsedYear = Integer.parseInt(parseBook(book[0][y], "date"));
                 if (parsedYear >= 2018) {
-                    System.out.printf("%s, %s. %s\n", parseBook(s, "name"), parseBook(s, "from"), parseBook(s, "date"));
+                    System.out.printf("%s, %s. %s\n", parseBook(book[0][y], "name"), parseBook(book[0][y], "from"), parseBook(book[0][y], "date"));
                 }
             }
         }
@@ -33,14 +33,14 @@ public class Tugas2 implements library {
 
     public boolean cekFrom(String method, String from){
         if(method.equals("find")){
-            for (String s : book) {
-                if (from.compareTo(parseBook(s, "from")) == 0) {
-                    System.out.printf("%s, %s. %s\n", parseBook(s, "name"), parseBook(s, "from"), parseBook(s, "date"));
+            for (int y = 0; y < book.length; y++) {
+                if (from.compareTo(parseBook(book[0][y], "from")) == 0) {
+                    System.out.printf("%s, %s. %s\n", parseBook(book[0][y], "name"), parseBook(book[0][y], "from"), parseBook(book[0][y], "date"));
                 }
             }
         } else if (method.equals("validate")){
-            for (String s : place) {
-                if (from.equals(s)) {
+            for (int y = 0; y < place.length; y++) {
+                if (from.equals(place[0][y])) {
                     return true;
                 }
             }
@@ -50,14 +50,14 @@ public class Tugas2 implements library {
 
     public boolean cekName(String method, String name){
         if (method.equals("find")){
-            for (String s : book) {
-                if (name.compareTo(parseBook(s, "name")) == 0) {
-                    System.out.printf("%s, %s. %s\n", parseBook(s, "name"), parseBook(s, "from"), parseBook(s, "date"));
+            for (int y = 0; y < book.length; y++) {
+                if (name.compareTo(parseBook(book[0][y], "name")) == 0) {
+                    System.out.printf("%s, %s. %s\n", parseBook(book[0][y], "name"), parseBook(book[0][y], "from"), parseBook(book[0][y], "date"));
                 }
             }
         } else if (method.equals("dup")){
-            for (String s : book) {
-                if (name.compareTo(parseBook(s, "name")) == 0) {
+            for (int y = 0; y < book.length; y++) {
+                if (name.compareTo(parseBook(book[0][y], "name")) == 0) {
                     return true;
                 }
             }
@@ -67,8 +67,8 @@ public class Tugas2 implements library {
 
     public void list(){
         System.out.printf("%-15s | %-15s | %-15s", "Name", "From", "Year");
-        for (String s : book) {
-            System.out.printf("\n%-15s , %-15s . %-15s", parseBook(s,"name"), parseBook(s, "from"), parseBook(s, "date"));
+        for (int y = 0; y < book.length; y++) {
+            System.out.printf("\n%-15s , %-15s . %-15s", parseBook(book[0][y],"name"), parseBook(book[0][y], "from"), parseBook(book[0][y], "date"));
         }
         mainMenu();
     }
@@ -119,12 +119,12 @@ public class Tugas2 implements library {
         System.out.print("Masukkan Nama buku :");
         input.nextLine();
         String rmBook = input.nextLine();
-        String[] tempBooks = new String[book.length - 1];
+        String[][] tempBooks = new String[0][book.length - 1];
         try {
             if(cekName("dup", rmBook)){
                 for(int i = 0, k = 0; i < book.length; i++){
-                    if (!rmBook.equals(parseBook(book[i], "name"))){
-                        tempBooks[k++] = book[i];
+                    if (!rmBook.equals(parseBook(book[0][i], "name"))){
+                        tempBooks[0][k++] = book[0][i];
                     }
                 }
                 inIndex--;
@@ -179,10 +179,11 @@ public class Tugas2 implements library {
         inputDate();
 
         String bookName = (inName + "," + inFrom + "." + inDate);
-        book = Arrays.copyOf(book, inIndex + 1);
-        book[inIndex] = bookName;
+        book[0] = Arrays.copyOf(book[0], inIndex + 1);
+        book[0][inIndex] = bookName;
         inIndex++;
         System.out.println("Buku berhasil ditambahkan");
+        System.out.println(Arrays.deepToString(book));
         mainMenu();
     }
 
@@ -204,7 +205,6 @@ public class Tugas2 implements library {
     }
     public static void main(String[] args) {
         Tugas2 main = new Tugas2();
-        main.book[0] = "This is Book,Malang.2022";
         main.mainMenu();
     }
 }

@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93fbea7e-baac-4635-9c2a-8bbe9eb3b6c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tugas2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tugas2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,6 +84,7 @@
       <workItem from="1665577245510" duration="840000" />
       <workItem from="1665743987669" duration="1201000" />
       <workItem from="1666027071297" duration="1805000" />
+      <workItem from="1666130150885" duration="3824000" />
     </task>
     <servers />
   </component>
